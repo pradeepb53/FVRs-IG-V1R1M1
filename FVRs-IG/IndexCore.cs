@@ -128,6 +128,7 @@ namespace FVRs_IG
 
             string finalSearchWord = "";
 
+            Console.ForegroundColor = ConsoleColor.Green;
             //Console.SetWindowSize();
 
             for (int i = 0; i < finalDeDupedWordList.Length; i++)

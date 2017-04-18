@@ -100,21 +100,21 @@ namespace FVRs_IG
             // MessageBox.Show("Please Wait.....Index is being generated!");
 
             this.timerCoreOps.Start();
-            this.progressBarCoreOps.Increment(10);
+            this.progressBarCoreOps.Increment(2);
 
             string[] excludedWords = new string[excludedWordList.Count()];
             int index = 0;
             foreach (String element in excludedWordList)
             {
                 excludedWords[index] = element.Trim(); // Preserve original case - Upper/Lower
-                this.progressBarCoreOps.Increment(5);
+                this.progressBarCoreOps.Increment(1);
                 index++;
             }
 
-            this.progressBarCoreOps.Increment(25);
+            this.progressBarCoreOps.Increment(5);
 
             IndexCore iGenerator = new IndexCore();
-            this.progressBarCoreOps.Increment(25);
+            this.progressBarCoreOps.Increment(5);
             iGenerator.processTranscript(textBoxSelectFile.Text, excludedWords);
 
             //MessageBox.Show("index page being saved!!");
@@ -123,7 +123,7 @@ namespace FVRs_IG
 
             iGenerator.printWordIndex();
 
-            this.progressBarCoreOps.Increment(5);
+            this.progressBarCoreOps.Increment(50);
             this.timerCoreOps.Stop();
             this.timerCoreOps.Dispose();
             progressBarCoreOps.Hide();
@@ -138,7 +138,7 @@ namespace FVRs_IG
 
         private void timerCoreOps_Tick(object sender, EventArgs e)
         {
-            this.progressBarCoreOps.Increment(10);
+            this.progressBarCoreOps.Increment(1);
         }
 
         private async void buttonProgress_Click(object sender, EventArgs e)
