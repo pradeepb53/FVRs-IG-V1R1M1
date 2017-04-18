@@ -106,7 +106,7 @@ namespace FVRs_IG
             int index = 0;
             foreach (String element in excludedWordList)
             {
-                excludedWords[index] = element.Trim().ToLower();
+                excludedWords[index] = element.Trim(); // Preserve original case - Upper/Lower
                 this.progressBarCoreOps.Increment(5);
                 index++;
             }
