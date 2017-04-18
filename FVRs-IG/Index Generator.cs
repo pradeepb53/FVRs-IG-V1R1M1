@@ -66,7 +66,7 @@ namespace FVRs_IG
         private void textBoxSelectFile_Click(object sender, EventArgs e)
         {
             openFileDialogSelectFile = new OpenFileDialog();
-            openFileDialogSelectFile.Filter = "DOCX|*.docx";
+            openFileDialogSelectFile.Filter = "DOC|*.doc";
 
             if (openFileDialogSelectFile.ShowDialog() == DialogResult.OK)
             {

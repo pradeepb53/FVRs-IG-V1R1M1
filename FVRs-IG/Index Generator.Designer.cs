@@ -40,7 +40,6 @@
             this.openFileDialogSelectFile = new System.Windows.Forms.OpenFileDialog();
             this.progressBarCoreOps = new System.Windows.Forms.ProgressBar();
             this.timerCoreOps = new System.Windows.Forms.Timer(this.components);
-            this.buttonProgress = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxWordList
@@ -125,22 +124,11 @@
             // 
             this.timerCoreOps.Tick += new System.EventHandler(this.timerCoreOps_Tick);
             // 
-            // buttonProgress
-            // 
-            this.buttonProgress.Location = new System.Drawing.Point(284, 396);
-            this.buttonProgress.Name = "buttonProgress";
-            this.buttonProgress.Size = new System.Drawing.Size(75, 23);
-            this.buttonProgress.TabIndex = 8;
-            this.buttonProgress.Text = "Progress";
-            this.buttonProgress.UseVisualStyleBackColor = true;
-            this.buttonProgress.Click += new System.EventHandler(this.buttonProgress_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 445);
-            this.Controls.Add(this.buttonProgress);
             this.Controls.Add(this.progressBarCoreOps);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.buttonCreate);
@@ -172,7 +160,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogSelectFile;
         private System.Windows.Forms.ProgressBar progressBarCoreOps;
         private System.Windows.Forms.Timer timerCoreOps;
-        private System.Windows.Forms.Button buttonProgress;
     }
 }
 
