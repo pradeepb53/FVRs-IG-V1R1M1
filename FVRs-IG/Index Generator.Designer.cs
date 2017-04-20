@@ -160,6 +160,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogSelectFile;
         private System.Windows.Forms.ProgressBar progressBarCoreOps;
         private System.Windows.Forms.Timer timerCoreOps;
+        
     }
 }
 

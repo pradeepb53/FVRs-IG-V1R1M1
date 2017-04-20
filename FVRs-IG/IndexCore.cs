@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 
 namespace FVRs_IG
@@ -128,8 +126,10 @@ namespace FVRs_IG
 
             string finalSearchWord = "";
 
+            //Set console window properties
+            Console.Title = "- Index Generator Status -";
             Console.ForegroundColor = ConsoleColor.Green;
-            //Console.SetWindowSize();
+
 
             for (int i = 0; i < finalDeDupedWordList.Length; i++)
             {
@@ -445,7 +445,7 @@ namespace FVRs_IG
 
                 }
 
-                //If columnsPerRowCount is 1, then print one line and reset the counter 
+                //If columnsPerRowCount is 1, then print 1 line and reset the counter 
                 if (columnsPerRowCount == 1)
                 {
                     Paragraph para3 = indexDoc.Paragraphs.Add();

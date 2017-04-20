@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FVRs_IG
@@ -14,14 +9,14 @@ namespace FVRs_IG
     public partial class Form1 : Form
     {
         BindingList<String> excludedWordList = new BindingList<string>();
-        
+
         public Form1()
         {
             InitializeComponent();
             setButtonStatus();
             buildWordList();
         }
-        
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -31,24 +26,32 @@ namespace FVRs_IG
         {
             buttonCreate.Hide();
             buttonClear.Hide();
-           // progressBarCoreOps.Hide();
         }
 
         private void buildWordList()
         {
             excludedWordList.Add("The");
+            excludedWordList.Add("the");
             excludedWordList.Add("They");
+            excludedWordList.Add("they");
             excludedWordList.Add("Them");
+            excludedWordList.Add("them");
             excludedWordList.Add("There");
+            excludedWordList.Add("there");
             excludedWordList.Add("This");
+            excludedWordList.Add("this");
             excludedWordList.Add("That");
+            excludedWordList.Add("that");
             excludedWordList.Add("When");
+            excludedWordList.Add("when");
             excludedWordList.Add("Where");
+            excludedWordList.Add("where");
             excludedWordList.Add("What");
+            excludedWordList.Add("what");
 
             listBoxWordList.DataSource = excludedWordList;
 
-            
+
         }
 
         private void buttonAddWord_Click(object sender, EventArgs e)
@@ -76,6 +79,7 @@ namespace FVRs_IG
                 buttonCreate.BackColor = Color.LimeGreen;
                 buttonClear.Show();
                 buttonCreate.Show();
+                MessageBox.Show("Please exit out of all other programs....... MS Word/MS Excel......etc..");
             }
 
         }
@@ -86,7 +90,6 @@ namespace FVRs_IG
             textBoxSelectFile.Enabled = true;
             buttonCreate.Hide();
             buttonClear.Enabled = false;
-
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -97,9 +100,9 @@ namespace FVRs_IG
             buttonCreate.Enabled = false;
             progressBarCoreOps.Show();
 
-            // MessageBox.Show("Please Wait.....Index is being generated!");
-
+            this.timerCoreOps.Interval = 10;
             this.timerCoreOps.Start();
+  
             this.progressBarCoreOps.Increment(2);
 
             string[] excludedWords = new string[excludedWordList.Count()];
@@ -114,16 +117,13 @@ namespace FVRs_IG
             this.progressBarCoreOps.Increment(5);
 
             IndexCore iGenerator = new IndexCore();
-            this.progressBarCoreOps.Increment(5);
+            this.progressBarCoreOps.Increment(40);
             iGenerator.processTranscript(textBoxSelectFile.Text, excludedWords);
 
-            //MessageBox.Show("index page being saved!!");
-
-            this.progressBarCoreOps.Increment(20);
+            this.progressBarCoreOps.Increment(95);
 
             iGenerator.printWordIndex();
 
-            this.progressBarCoreOps.Increment(50);
             this.timerCoreOps.Stop();
             this.timerCoreOps.Dispose();
             progressBarCoreOps.Hide();
@@ -141,56 +141,5 @@ namespace FVRs_IG
             this.progressBarCoreOps.Increment(1);
         }
 
-        private async void buttonProgress_Click(object sender, EventArgs e)
-        {
-            // progressBarCoreOps.Maximum = 100;
-            // progressBarCoreOps.Step = 1;
-
-            //var progress = new Progress<int>(v => { progressBarCoreOps.Value = v; });
-            // await Task.Run(() => DoWork(progress));
-            var progress = new Progress<int>(ReportProgress);
-            await copyFiles(progress);
-        }
-
-        private async Task copyFiles(IProgress<int> progress)
-        {
-            for (int i = 0; i < 11; i++)
-            {
-                await Task.Run(() => { Thread.Sleep(1000); });
-                progress.Report(i);
-            }
-        }
-
-        private void ReportProgress(int obj)
-        {
-            progressBarCoreOps.Increment(obj); //
-        }
-
-        private void setProgressBar(int obj)
-        {
-            progressBarCoreOps.Increment(obj);
-        }
-
-        private void DoWork(IProgress<int> progress)
-        {
-            for (int i = 0; i < 100000; i++)
-            {
-
-                calculateJ(i);
-
-                if (progress != null)
-                {
-
-                    progress.Report(i);
-                    progress.Report((i + 1) * 100 / 100000);
-                }
-            }
-        }
-
-
-        private void calculateJ(int i)
-        {
-            double pow = Math.Pow(i, i);
-        }
     }
 }
