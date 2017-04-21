@@ -26,6 +26,18 @@ namespace FVRs_IG
         {
             buttonCreate.Hide();
             buttonClear.Hide();
+            string serverName = System.Windows.Forms.SystemInformation.ComputerName;
+            if ((serverName.Substring(0, 5) == "FVRSC") || (serverName.Substring(0, 3) == "WLT"))
+            {
+                
+            }
+            else
+            {
+                textBoxSelectFile.Enabled = false;
+                buttonAddWord.Enabled = false;
+                listBoxWordList.Enabled = false;
+                MessageBox.Show("Unlicensed Product - Please contact Fraser Valley Reporting Services!");
+            }
         }
 
         private void buildWordList()

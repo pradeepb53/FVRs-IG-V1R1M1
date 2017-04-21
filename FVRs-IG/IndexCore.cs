@@ -207,16 +207,26 @@ namespace FVRs_IG
                         int pageNumberOfTheWord = 0;
                         int lineNumberOfTheWord = 0;
 
+                        string textOfTheSearchedRangeSentence = ""; //04/21/2017
+                        string firstWordOfTheSearchedSentence = "";  //04/21/2017
 
                         while (searchRange.Find.Found)
                         {
 
                             Console.WriteLine("Looking for word : " + currentWord);
 
-                            // Get current sentence being searched and extract the first word
+                            // If final search word is only a number, get current sentence being searched and extract the first word
 
-                            string textOfTheSearchedRangeSentence = searchRange.Sentences.First.Text;
-                            string firstWordOfTheSearchedSentence = textOfTheSearchedRangeSentence.Substring(0, finalSearchWord.Length);
+                            if (Regex.IsMatch(finalSearchWord, @"^[0-9]"))   //04/21/2017
+                            {
+                                 textOfTheSearchedRangeSentence = searchRange.Sentences.First.Text;
+
+                                if (textOfTheSearchedRangeSentence.Length >= finalSearchWord.Length) //04/21/2017 // To avoid "System.ArgumentOutOfRangeException"
+                                {
+                                    firstWordOfTheSearchedSentence = textOfTheSearchedRangeSentence.Substring(0, finalSearchWord.Length);
+                                }    
+
+                            }
 
                             //If sentence starts with a number, it usually is a question number, now if it is a number and matches the searched text, it definitely 
                             // cannot be a regular word, it got to be a question number, so ignore! 

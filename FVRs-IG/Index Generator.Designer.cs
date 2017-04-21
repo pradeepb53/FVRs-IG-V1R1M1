@@ -137,11 +137,12 @@
             this.Controls.Add(this.buttonAddWord);
             this.Controls.Add(this.labelWordList);
             this.Controls.Add(this.listBoxWordList);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "FVRs Index Generator";
+            this.Text = "FVRs Index Generator   Copyright(FVRS)";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
