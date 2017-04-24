@@ -10,6 +10,15 @@ namespace FVRs_IG
 {
     class IndexCore
     {
+        //-------------------------------------------------------------------------------------------------------------//
+        //                           Source modifications
+        //-------------------------------------------------------------------------------------------------------------//
+        // V1R0M0 -> V1R0M1 (Bug fixes)
+        // 1) 04/24/2017 - On the printed index, 2 columns were skiped over to next page
+        //     Reason    - \f (Form-feed character) was in the middle of the word("Self-represented\fSTEVEN" as one word)  
+        //     Fix       - Add \f removal on to processTranscript() method
+        //-------------------------------------------------------------------------------------------------------------//
+
         private Application app = new Application();
 
         private List<TranscriptWord> WordIndexDictionary = new List<TranscriptWord>();
@@ -72,8 +81,14 @@ namespace FVRs_IG
             }
 
             //Second parse-split, remove all remaining tabs and under-scores
+            //04/24/2017 - V1R0M1 - Remove \f Form-feed character
 
-            secondParseWordList = secondParseString.Replace("\t", " ").Replace("__", " ").Split(' ');
+            //secondParseWordList = secondParseString.Replace("\t", " ").Replace("__", " ").Split(' '); - V1R1M0 04/24/2017
+
+            //Second parse-split, remove all remaining tabs and under-scores
+            //04/24/2017 - V1R0M1 - Remove \f (Form-feed character)
+
+            secondParseWordList = secondParseString.Replace("\t", " ").Replace("\f", " ").Replace("__", " ").Split(' ');  // 04/24/2017 - V1R0M1
 
             //Read after second-parse-split, remove leading and trailling hyphens, remove leading and trailling dashes
             //Remove trailling periods, commas, colons and semicolons
