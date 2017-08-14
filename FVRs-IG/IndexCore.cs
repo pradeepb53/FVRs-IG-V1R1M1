@@ -18,7 +18,7 @@ namespace FVRs_IG
         //     Reason    - \f (Form-feed character) was in the middle of the word("Self-represented\fSTEVEN" as one word)  
         //     Fix       - Add \f removal on to processTranscript() method
         //-------------------------------------------------------------------------------------------------------------//
-        // V1R1M0 -> V1R1M0 (New release candidate)
+        // V1R1M0 -> V1R1M0 (New version/release candidate)
         // 1) 08/14/2017 - Excluded word list is now saved/retrieved from a text document. Replaced single word -
         //                 'Add Process', with a multi line text box with a 'Save' button to Add-Modify new words. 
         //-------------------------------------------------------------------------------------------------------------//
