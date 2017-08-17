@@ -19,7 +19,7 @@ namespace FVRs_IG
         //     Fix       - Add \f removal on to processTranscript() method
         //----------------------------------------------------------------------------------------------------------------------------//
         // V1R1M0 -> V1R1M0 (New version/release candidate) - Index Generator.cs (Deprecated source is in Git FVRs-IG-V1R0M0 branch) 
-        //
+        //                  Enhancements:
         // 1) 08/16/2017 - Excluded word list is now saved and retrieved from a text document.Replaced current single word -
         //                 'Add Process', with a multi line text box and a 'Save' button to Add-Modify excluded words. 
         //                  1. New text file is 'Word-List.txt' in the Application.StartupPath\data folder
