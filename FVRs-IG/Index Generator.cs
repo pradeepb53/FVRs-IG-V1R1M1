@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,14 +10,15 @@ namespace FVRs_IG
 {
     public partial class Form1 : Form
     {
-        //BindingList<String> excludedWordList = new BindingList<string>(); Deprecated 08/14/2017
-        System.IO.StreamWriter excludedWordsFile;
+             
+        System.IO.StreamWriter excludedWordsFile; // New version V1R1M0 - 08/16/2017
+        string excludedWordsFilePath = Application.StartupPath + @"\data\Word-List.txt"; // New version V1R1M0 - 08/16/2017
 
         public Form1()
         {
             InitializeComponent();
+            buildWordList(); // New version V1R1M0 - 08/16/2017
             setButtonStatus();
-            buildWordList();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,6 +30,7 @@ namespace FVRs_IG
         {
             buttonCreate.Hide();
             buttonClear.Hide();
+            buttonSaveWords.Enabled = false; // New version V1R1M0 - 08/16/2017
 
             string serverName = System.Windows.Forms.SystemInformation.ComputerName;
             if ((serverName.Substring(0, 5) == "FVRSC") || (serverName.Substring(0, 3) == "WLT"))
@@ -36,52 +40,27 @@ namespace FVRs_IG
             else
             {
                 textBoxSelectFile.Enabled = false;
-                //buttonAddWord.Enabled = false; Deprecated 08/14/2017
-                // listBoxWordList.Enabled = false;  Deprecated 08/14/2017
+                buttonSaveWords.Enabled = false; // New version V1R1M0 - 08/16/2017
+                textBoxExcludedWords.Enabled = false;  // New version V1R1M0 - 08/16/2017
                 MessageBox.Show("Unlicensed Product - Please contact Fraser Valley Reporting Services!");
             }
         }
 
         private void buildWordList()
         {
-            //excludedWordList.Add("The"); Deprecated 08/14/2017
-            //excludedWordList.Add("the");
-            //excludedWordList.Add("They");
-            //excludedWordList.Add("they");
-            //excludedWordList.Add("Them");
-            //excludedWordList.Add("them");
-            //excludedWordList.Add("There");
-            //excludedWordList.Add("there");
-            //excludedWordList.Add("This");
-            //excludedWordList.Add("this");
-            //excludedWordList.Add("That");
-            //excludedWordList.Add("that");
-            //excludedWordList.Add("When");
-            //excludedWordList.Add("when");
-            //excludedWordList.Add("Where");
-            //excludedWordList.Add("where");
-            //excludedWordList.Add("What");
-            //excludedWordList.Add("what");
+           
+            try
+            {
+                this.textBoxExcludedWords.Text = System.IO.File.ReadAllText(excludedWordsFilePath);   // New version V1R1M0 - 08/16/2017
+            }
+            catch (FileNotFoundException ex)  // New version V1R1M0 - 08/16/2017
+            {
 
-            // listBoxWordList.DataSource = excludedWordList; // Deprecated 08/14/2017
-
-            this.textBoxExcludedWords.Text = System.IO.File.ReadAllText("c:\\Word-List.txt");  // new version V1R1M0 - 08/14/2017
-            buttonSaveWords.Enabled = false;
+                MessageBox.Show("Error - Excluded word list not found! ");  // New version V1R1M0 - 08/16/2017
+            } 
 
         }
 
-        //Deprecated 08/14/2017
-        //private void buttonAddWord_Click(object sender, EventArgs e)
-        //{
-        //    AddNewWord addWords = new AddNewWord();
-        //    addWords.ShowDialog();
-        //    string newWord = addWords.retrieveNewWord();
-        //    if (newWord != "")
-        //    {
-        //        excludedWordList.Add(newWord);
-        //        addWords.Dispose();
-        //    }
-        //}
 
         private void textBoxSelectFile_Click(object sender, EventArgs e)
         {
@@ -97,6 +76,7 @@ namespace FVRs_IG
                 buttonClear.Show();
                 buttonCreate.Show();
                 MessageBox.Show("Please exit out of all other programs....... MS Word/MS Excel......etc..");
+                buttonSaveWords.Enabled = false; //new version V1R1M0 - 08/16/2017
             }
 
         }
@@ -107,12 +87,12 @@ namespace FVRs_IG
             textBoxSelectFile.Enabled = true;
             buttonCreate.Hide();
             buttonClear.Enabled = false;
+            buttonSaveWords.Enabled = true; //new version V1R1M0 - 08/16/2017
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
 
-           // buttonAddWord.Enabled = false; - Deprecated 08/14/2017
             buttonClear.Enabled = false;
             buttonCreate.Enabled = false;
             progressBarCoreOps.Show();
@@ -122,21 +102,30 @@ namespace FVRs_IG
   
             this.progressBarCoreOps.Increment(2);
 
-            //string[] excludedWords = new string[excludedWordList.Count()]; Deprecated 08/14/2017
+            //------------------ new version V1R1M0 - 08/16/2017 --------------------------------------------------
+
+            var excludedWordsInitialArray = File.ReadAllLines(excludedWordsFilePath);
+            string[] excludedWordsFinalList = new string[excludedWordsInitialArray.Length];
             int index = 0;
-            //foreach (String element in excludedWordList) Deprecated 08/14/2017
-            //{
-            //    excludedWords[index] = element.Trim(); // Preserve original case - Upper/Lower
-            //    this.progressBarCoreOps.Increment(1);
-            //    index++;
-            //}
+            foreach (var item in excludedWordsInitialArray)
+            {
+                if (item.Trim() != "")
+                {
+                    excludedWordsFinalList[index] = item.Trim(); // Preserve original case - Upper/Lower
+                    index++;
+                }
+
+            }
+
+            //------------------------------------------------------------------------------------------------------
+
 
             this.progressBarCoreOps.Increment(5);
 
             IndexCore iGenerator = new IndexCore();
             this.progressBarCoreOps.Increment(40);
-            // iGenerator.processTranscript(textBoxSelectFile.Text, excludedWords);  Deprecated 08/14/2017
-
+           
+            iGenerator.processTranscript(textBoxSelectFile.Text, excludedWordsFinalList);  //new version V1R1M0 - 08/16/2017
             this.progressBarCoreOps.Increment(95);
 
             iGenerator.printWordIndex();
@@ -145,7 +134,6 @@ namespace FVRs_IG
             this.timerCoreOps.Dispose();
             progressBarCoreOps.Hide();
 
-            // buttonAddWord.Enabled = true; Deprecated 08/14/2017
             textBoxSelectFile.Enabled = true;
             buttonClear.Enabled = true;
             buttonCreate.BackColor = Color.LightGray;
@@ -158,12 +146,13 @@ namespace FVRs_IG
             this.progressBarCoreOps.Increment(1);
         }
 
-        private void buttonSaveWords_Click(object sender, EventArgs e)   // new version V1R1M0 - 08/14/2017
+        private void buttonSaveWords_Click(object sender, EventArgs e)    // New version V1R1M0 - 08/16/2017
         {
-            string excludedWordList = this.textBoxExcludedWords.Text;
-             excludedWordsFile = new System.IO.StreamWriter("c:\\Word-List.txt");
-            excludedWordsFile.WriteLine(excludedWordList);
-            excludedWordsFile.Close();
+            string excludedWordList = this.textBoxExcludedWords.Text;  // New version V1R1M0 - 08/16/2017
+            excludedWordsFile = new System.IO.StreamWriter(excludedWordsFilePath);  // New version V1R1M0 - 08/16/2017
+            excludedWordsFile.WriteLine(excludedWordList);  // New version V1R1M0 - 08/16/2017
+            excludedWordsFile.Close();  // New version V1R1M0 - 08/16/2017
+
         }
 
         private void textBoxExcludedWords_TextChanged(object sender, EventArgs e)
