@@ -145,7 +145,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "FVRs Index Generator - V1R1M0                                                    " +
+            this.Text = "FVRs Index Generator - V1R1M1                                                    " +
     "                    Copyright(2017-FVRs)";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

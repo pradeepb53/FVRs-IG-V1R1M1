@@ -33,7 +33,7 @@ namespace FVRs_IG
             buttonSaveWords.Enabled = false; // New version V1R1M0 - 08/16/2017
 
             string serverName = System.Windows.Forms.SystemInformation.ComputerName;
-            if ((serverName.Substring(0, 5) == "FVRSC") || (serverName.Substring(0, 3) == "WLT"))
+            if ((serverName.Substring(0, 5) == "FVRSC") || (serverName.Substring(0, 3) == "WLT") || (serverName.Substring(0, 7) == "FVRsDev")) //V1R1M1 - 09/18/2017
             {
                 
             }
@@ -65,7 +65,7 @@ namespace FVRs_IG
         private void textBoxSelectFile_Click(object sender, EventArgs e)
         {
             openFileDialogSelectFile = new OpenFileDialog();
-            openFileDialogSelectFile.Filter = "DOC|*.doc";
+            openFileDialogSelectFile.Filter = "DOC|*.doc|DOCX|*.docx"; //V1R1M1 - 09/18/2017
 
             if (openFileDialogSelectFile.ShowDialog() == DialogResult.OK)
             {
