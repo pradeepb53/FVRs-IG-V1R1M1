@@ -52,12 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddNewWord.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddNewWord.Designer.cs">
-      <DependentUpon>AddNewWord.cs</DependentUpon>
-    </Compile>
     <Compile Include="Index Generator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,9 +63,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranscriptWord.cs" />
-    <EmbeddedResource Include="AddNewWord.resx">
-      <DependentUpon>AddNewWord.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Index Generator.resx">
       <DependentUpon>Index Generator.cs</DependentUpon>
     </EmbeddedResource>

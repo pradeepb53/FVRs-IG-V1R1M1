@@ -27,10 +27,11 @@ namespace FVRs_IG
         //                  3. New button (replaced old 'Add-Words'(buttonAddWord)) is 'buttonSaveWords'  
         //---------------------------------------------------------------------------------------------------------------------------//
         // V1R1M0 -> V1R1M1 (Minor release) - Index Generator.cs  (Code base is in Git FVRs-IG-V1R1M1) 
-        //                  Local Repo is : C:\Users\pradeep\source\repos\FVRs-IG-V1R1M0
+        //                  Local Repo is : C:\Users\pradeep\source\repos\FVRs-IG-V1R1M1
         // 1) 09/18/2017 -  Following minor changes:
         //                  1. openFileDialogSelectFile.Filter = "DOC|*.doc|DOCX|*.docx"; (Template format is now in Word 2016- docx)
         //                  2. Server name validation : "FVRsDev" added to list of valid computers 
+        //                   *** Old 'Add Word' components removed.
         //---------------------------------------------------------------------------------------------------------------------------//
 
 
